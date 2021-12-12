@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 
 function settings() {
   const router = useRouter();
@@ -8,12 +8,14 @@ function settings() {
 
   // send req for user info and settings
 
-  return <div>
-    <h1>settings</h1>
-    <p>
-      lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod
-    </p>
-  </div>
+  return (
+    <div className="p-3">
+      <h1>settings</h1>
+      <p>
+        lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod
+      </p>
+    </div>
+  );
 }
 
 export default settings;
