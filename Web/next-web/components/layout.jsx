@@ -53,7 +53,7 @@ export default function Layout({ children }) {
           </li>
         </ul>
       </nav>
-      <hr />
+
       {children}
     </>
   );
