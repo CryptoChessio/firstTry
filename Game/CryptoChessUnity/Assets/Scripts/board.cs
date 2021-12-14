@@ -46,3 +46,4 @@ public class BoardHighlighting : MonoBehaviour {
     {
         foreach (GameObject go in highlights) go.SetActive(false);
     }
+}

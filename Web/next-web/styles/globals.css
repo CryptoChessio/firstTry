@@ -1,6 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* create default colors with 
+  - #0D1229
+  -  #00000
+  */
+:root {
+  --dark: #0d1229;
+  --blue: #112ca3;
+  --blueHL: #0f2eb6;
+}
 html,
 body {
   padding: 0;
@@ -16,4 +26,10 @@ a {
 
 * {
   box-sizing: border-box;
+  color: white;
+}
+
+nav {
+  background-color: var(--dark);
+  height: 10vh;
 }
