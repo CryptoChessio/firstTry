@@ -3,25 +3,35 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { UPDATE_PROFILE } from "react-redux";
-import Moralis from "moralis/types";
+import Moralis from "moralis";
 
 export default function Layout({ children }) {
-  const [UserNameState, setLoginState] = useState("");
   const [UserAddressState, setAddressState] = useState("");
+  const [UserNameState, setNameState] = useState("");
   const { userName, address } = useSelector((state) => state.profile);
   const dispatch = useDispatch();
 
-  async function SignUp(userName) {
-    console.log("login clicked");
+  useEffect(() => {
+    async function login() {
+      const user = await Moralis.User.logIn("acct");
+      if (user) {
+        user.get("profilePic", "username");
+      } else {
+        alert("sign in w mm");
+      }
+    }
+  });
+
+  async function SignUp() {
+    console.log("login called");
     var user = await Moralis.Web3.authenticate();
     if (user) {
       console.log(user);
       user.set("username", { userName });
     }
   }
+
   async function relogin(address) {
-    const profile = await fetch(`/api/profile/${address}`);
-    const profileJson = await profile.json();
     dispatch({
       type: UPDATE_PROFILE,
       payload: {
@@ -62,7 +72,7 @@ export default function Layout({ children }) {
               </Link>
             </li>
             <li className="ml-2 mr-2">
-              <Link href="settings">
+              <Link href="/settings/{userID}">
                 <a>settings</a>
               </Link>
             </li>
@@ -77,7 +87,6 @@ export default function Layout({ children }) {
             </li>
           </ul>
         </nav>
-
         {children}
       </>
     );
