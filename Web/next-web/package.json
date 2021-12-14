@@ -9,14 +9,17 @@
   },
   "dependencies": {
     "moralis": "^0.0.154",
-    "next": "12.0.7",
+    "next": "^12.0.7",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-redux": "^7.2.6",
-    "redux": "^4.1.2"
+    "redux": "^4.1.2",
+    "tailwind": "^4.0.0"
   },
   "devDependencies": {
+    "@next/eslint-plugin-next": "^12.0.7",
     "eslint": "8.4.1",
-    "eslint-config-next": "12.0.7"
+    "eslint-config-next": "12.0.7",
+    "eslint-config-prettier": "^8.3.0"
   }
 }
