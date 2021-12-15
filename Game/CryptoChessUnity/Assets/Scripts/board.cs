@@ -6,6 +6,8 @@ public class board : MonoBehaviour {
 
     [Header("Pretty")]
     [SerializeField] private Material tileMat;
+    [SerializeField] private Material hoverMat;
+    
     //Game logic
     private const int TILE_C_X = 8;
     private const int TILE_C_Y = 8;
@@ -19,12 +21,8 @@ public class board : MonoBehaviour {
     private void GenrateGrid(float tileSize, int tileCountX, int tileCountY){
         tiles = new GameObject[tileCountX, tileCountY];
         for (int x = 0; x < tileCountX; x++)
-        {
             for (int y = 0; y < tileCountY; y++)
-            {
                 tiles[x,y] = GenrateTile(tileSize, x, y);
-            }
-        }
     }
 
     private void Update() {
@@ -38,22 +36,27 @@ public class board : MonoBehaviour {
         if(Physics.Raycast(ray, out info, 100, LayerMask.GetMask("Tile"))){
             //get index of hit tile
             Vector2Int hitPostion = LookTileIndex(info.transform.gameObject);
-
+            
             if(currentHover == -Vector2Int.one){ //def hover
                 currentHover = hitPostion;
+                
                 tiles[hitPostion.x, hitPostion.y].layer = LayerMask.NameToLayer("Hover");
-                Debug.Log("hover");
+                // tiles[currentHover.x, currentHover.y].GetCompontent<MeshRenderer>().material = hoverMat;
+                // Debug.Log("hover");
             }
             if(currentHover != -Vector2Int.one){ //def hover
                 tiles[currentHover.x, currentHover.y].layer = LayerMask.NameToLayer("Tile"); //reset tile
                 currentHover = hitPostion;
                 tiles[hitPostion.x, hitPostion.y].layer = LayerMask.NameToLayer("Hover");
-                Debug.Log("hover");
+                Debug.Log(tiles[currentHover.x, currentHover.y]);
+                tiles[currentHover.x, currentHover.y].GetComponent<MeshRenderer>().material = hoverMat;
+                
             }
         }else{
             if(currentHover != -Vector2Int.one){
                 tiles[currentHover.x, currentHover.y].layer = LayerMask.NameToLayer("Tile");
                 currentHover = -Vector2Int.one;
+                tiles[currentHover.x, currentHover.y].GetComponent<MeshRenderer>().material = tileMat;
             }
         }
     }
@@ -88,13 +91,10 @@ public class board : MonoBehaviour {
     //ops
     private Vector2Int LookTileIndex(GameObject hitInfo){
         for (int x = 0; x < TILE_C_X; x++)
-        {
             for (int y = 0; y < TILE_C_Y; y++)
-            {
                 if(tiles[x,y] == hitInfo)
                     return new Vector2Int(x,y);
-            }
-        }
+        
         return -Vector2Int.one;
     }
 }

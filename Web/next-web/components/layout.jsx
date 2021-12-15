@@ -3,12 +3,13 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { UPDATE_PROFILE } from "react-redux";
+// import { profile } from "../redux/reducers/profile";
 import Moralis from "moralis";
 
 export default function Layout({ children }) {
   const [UserAddressState, setAddressState] = useState("");
   const [UserNameState, setNameState] = useState("");
-  // const { userName, address } = useSelector((state) => state.profile);
+  const { userName, address } = useSelector((state) => state.profile);
   const dispatch = useDispatch();
 
   useEffect(() => {
