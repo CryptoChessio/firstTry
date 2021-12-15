@@ -7,11 +7,12 @@ public class board : MonoBehaviour {
     [Header("Pretty")]
     [SerializeField] private Material tileMat;
     [SerializeField] private Material hoverMat;
+
     
     //Game logic
     private const int TILE_C_X = 8;
     private const int TILE_C_Y = 8;
-    private GameObject[,] tiles; //2 dem arry 
+    private GameObject[,] tiles; //2 dem array 
     private Camera currentCamera;
     private Vector2Int currentHover;
     public void Awake() {
@@ -30,6 +31,11 @@ public class board : MonoBehaviour {
             currentCamera = Camera.main;
             return;
         }
+
+        //this is fuking disgusting and not efficient at all
+        for (int x = 0; x < TILE_C_X; x++) 
+            for (int y = 0; y < TILE_C_Y; y++)
+                tiles[x,y].GetComponent<MeshRenderer>().material = tileMat; 
 
         RaycastHit info;
         Ray ray = currentCamera.ScreenPointToRay(Input.mousePosition);
@@ -56,7 +62,6 @@ public class board : MonoBehaviour {
             if(currentHover != -Vector2Int.one){
                 tiles[currentHover.x, currentHover.y].layer = LayerMask.NameToLayer("Tile");
                 currentHover = -Vector2Int.one;
-                tiles[currentHover.x, currentHover.y].GetComponent<MeshRenderer>().material = tileMat;
             }
         }
     }

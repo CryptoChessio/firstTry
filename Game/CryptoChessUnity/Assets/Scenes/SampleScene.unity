@@ -329,6 +329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMat: {fileID: 2100000, guid: a1e3c708d73af78388b7364dc9c338e5, type: 2}
+  hoverMat: {fileID: 2100000, guid: 8e9bc99deb5a42a3b82204d61dba1cb3, type: 2}
 --- !u!4 &1689980953
 Transform:
   m_ObjectHideFlags: 0
