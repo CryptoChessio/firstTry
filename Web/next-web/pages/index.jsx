@@ -1,10 +1,9 @@
+import Image from "next/image";
 function HomePage() {
   return (
     <div className="p-3">
       <h1>home</h1>
-      <p>
-        lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod
-      </p>
+      <Image alt="Mountains" src="../" />
     </div>
   );
 }

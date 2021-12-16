@@ -9,7 +9,7 @@ import Moralis from "moralis";
 export default function Layout({ children }) {
   const [UserAddressState, setAddressState] = useState("");
   const [UserNameState, setNameState] = useState("");
-  const { userName, address } = useSelector((state) => state.profile);
+  // const { userName, address } = useSelector((state) => state.profile);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -43,7 +43,7 @@ export default function Layout({ children }) {
   }
   return (
     <>
-      <nav className=" navbar navbar-defaultflex">
+      <nav className=" navbar navbar-defaultflex text-center content-center">
         <Link href="/">
           <a>
             <svg width="24" height="24">
