@@ -8,6 +8,12 @@ public class board : MonoBehaviour {
     [SerializeField] private Material tileMat;
     [SerializeField] private Material hoverMat;
 
+    [Header("Prefabs and Mats")]
+
+    [SerializeField] private GameObject[] prefab;
+    [SerializeField] private Material[] mats;
+
+
     
     //Game logic
     private const int TILE_C_X = 8;
