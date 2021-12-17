@@ -292,13 +292,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
-  m_LocalPosition: {x: 4, y: 5, z: -2}
+  m_LocalRotation: {x: 0.11567472, y: -0.6452214, z: 0.15574367, w: 0.7389537}
+  m_LocalPosition: {x: 13.46, y: 5.87, z: 4.33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 50, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 21.835, y: -81.287, z: 5}
 --- !u!1 &1689980951
 GameObject:
   m_ObjectHideFlags: 0
@@ -330,6 +330,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileMat: {fileID: 2100000, guid: a1e3c708d73af78388b7364dc9c338e5, type: 2}
   hoverMat: {fileID: 2100000, guid: 8e9bc99deb5a42a3b82204d61dba1cb3, type: 2}
+  WhiteHover: {fileID: 0}
+  BlackHover: {fileID: 0}
   TILE_SIZE: 1
   prefab:
   - {fileID: 640895743420667179, guid: a3735addb0cbafe799f104c768f496ed, type: 3}

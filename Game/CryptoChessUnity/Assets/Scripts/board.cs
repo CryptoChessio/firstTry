@@ -9,13 +9,17 @@ public class board : MonoBehaviour {
     [SerializeField] private Material tileMat;
     [SerializeField] private Material hoverMat;
 
+    [SerializeField] private Material WhiteHover;
+
+    [SerializeField] private Material BlackHover;
+
     [SerializeField] private float TILE_SIZE = 1.0f;
 
     [Header("Prefabs and Mats")]
 
     [SerializeField] private GameObject[] prefab;
     [SerializeField] private Material[] mats;
-        
+    
 
     
     //Game logic
@@ -49,9 +53,6 @@ public class board : MonoBehaviour {
         }
 
         //this is fuking disgusting and not efficient at all
-        for (int x = 0; x < TILE_C_X; x++) 
-            for (int y = 0; y < TILE_C_Y; y++)
-                tiles[x,y].GetComponent<MeshRenderer>().material = tileMat; 
 
         RaycastHit info;
         Ray ray = currentCamera.ScreenPointToRay(Input.mousePosition);
@@ -91,7 +92,7 @@ public class board : MonoBehaviour {
             
             if (ACTIVE != null && Input.GetMouseButtonUp(0)){
                 Vector2Int prevPos = new Vector2Int(ACTIVE.currX, ACTIVE.currY);
-
+                Debug.Log("prevPos: " + prevPos);
                 bool validMove = MoveTo(ACTIVE, hitPostion.x, hitPostion.y);
                 if(!validMove){
                     ACTIVE.transform.position = GetTileCenter(prevPos.x, prevPos.y);
@@ -105,6 +106,9 @@ public class board : MonoBehaviour {
                 currentHover = -Vector2Int.one;
             }
         }
+
+        // set tiles with chess pieces to have a WhiteTile matriel
+        
     }
 
     //board gen
@@ -161,6 +165,8 @@ public class board : MonoBehaviour {
         chessPieces[5,7] = SpawnSinglePiece(ChessPieceType.Bishop, black);
         chessPieces[6,7] = SpawnSinglePiece(ChessPieceType.Knight, black);
         chessPieces[7,7] = SpawnSinglePiece(ChessPieceType.Rook, black);
+
+        
 
         for (int i = 0; i < TILE_C_X; i++)
             chessPieces[i,6] = SpawnSinglePiece(ChessPieceType.Pawn, black);
