@@ -1,22 +1,60 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public enum ChessPieceType { //ul of data vals for chess pieces 
+public enum ChessPieceType
+{ //ul of data vals for chess pieces 
     None = 0,
     Pawn = 1,
     Rook = 2,
     Knight = 3,
     Bishop = 4,
-    Queen = 5, 
-    King =6
+    Queen = 5,
+    King = 6
 }
 
 
-public class ChessPiece : MonoBehaviour {
+public class ChessPiece : MonoBehaviour
+{ //chess piece class
     public int team;
     public int currX;
     public int currY;
     public ChessPieceType type;
     public Vector3 desPosition;
-    public Vector3 desScale;
+    // public Vector3 desScale = new Vector3(1,1,1);
+
+    private void Update()
+    {
+        transform.position = Vector3.Lerp(transform.position, desPosition, Time.deltaTime * 5); //lerp to des position
+        // transform.localScale = Vector3.Lerp(transform.localScale, desScale, Time.deltaTime * 5); //lerp to des scale
+    }
+
+    public List<Vector2Int> GetAvalMoves(
+        ref ChessPiece[,] board,
+        int tileCountX,
+        int tileCountY)
+    {
+        List<Vector2Int> moves = new List<Vector2Int>();
+
+        moves.Add(new Vector2Int(3, 3));
+        moves.Add(new Vector2Int(3, 4));
+        moves.Add(new Vector2Int(3, 5));
+        moves.Add(new Vector2Int(3, 6));
+
+        return moves;
+
+    }
+
+    public virtual void SetPosition(Vector3 pos, bool force = false)
+    { //set position
+        desPosition = pos;
+        if (force)
+            transform.position = desPosition;
+    }
+
+    // public virtual void SetScale(Vector3 scale, bool force = false){ //set scale
+    //     desScale = scale;
+    //     if(force)
+    //         transform.localScale = desScale;
+    // }
 }
