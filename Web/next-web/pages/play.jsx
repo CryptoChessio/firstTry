@@ -16,6 +16,8 @@ function play() {
           <p>Buy in 1 MATIC</p>
         </div>
       </div>
+      {/* <h2>Welcome {user.get("username")}</h2>
+      <h2>Your wallet address is {user.get("ethAddress")}</h2> */}
     </div>
   );
 }

@@ -1,48 +1,24 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { UPDATE_PROFILE } from "react-redux";
-// import { profile } from "../redux/reducers/profile";
+import { useMoralis } from "react-moralis";
 import settingsSVG from "../images/Settings/Settings.svg";
-import Moralis from "moralis";
 
 export default function Layout({ children }) {
-  const [UserAddressState, setAddressState] = useState("");
-  const [UserNameState, setNameState] = useState("");
-  // const { userName, address } = useSelector((state) => state.profile);
+  const [userID, setUserID] = useState();
+  const [UserNameState, setNameState] = useState();
   const dispatch = useDispatch();
-
+  const { authenticate, isAuthenticated, logout, user } = useMoralis();
+  // when authenticated, set the user address and name
   useEffect(() => {
-    async function login() {
-      const user = await Moralis.User.logIn("acct");
-      if (user) {
-        user.get("profilePic", "username");
-      } else {
-        alert("sign in w mm");
-      }
+    if (user) {
+      setUserID(user.get("ethAddress"));
+      setNameState(user.get("username"));
     }
+    console.log(userID);
   });
 
-  async function SignUp() {
-    console.log("login called");
-    var user = await Moralis.Web3.authenticate();
-    if (user) {
-      console.log(user);
-      user.set("username", { userName });
-    }
-  }
-
-  async function relogin(address) {
-    dispatch({
-      type: UPDATE_PROFILE,
-      payload: {
-        userName: profileJson.userName,
-        address: profileJson.address,
-      },
-    });
-  }
   return (
     <>
       <nav className="flex">
@@ -69,19 +45,31 @@ export default function Layout({ children }) {
               </Link>
             </li>
             <li className="mx-5">
-              <button
-                type="button"
-                className="bg-orange-500  hover:bg-blue-700 text-white font-bold rounded p-2 -my-2"
-                // onClick={login}
-              >
-                Connect To MetaMask
-              </button>
+              {isAuthenticated ? (
+                <button
+                  onClick={logout}
+                  className="bg-transparent hover:bg-indigo-600 text-orange-300 font-semibold hover:text-white py-2 px-4 border border-indigo-600 hover:border-transparent rounded"
+                >
+                  Logout
+                  <p className="text-xs">{user.get("ethAddress")}</p>
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  className="bg-orange-500  hover:bg-blue-700 text-white font-bold rounded p-2 -my-2"
+                  onClick={() => {
+                    authenticate({ provider: "metamask" });
+                  }}
+                >
+                  Connect To MetaMask
+                </button>
+              )}
             </li>
             <li className="mx-5">
               <Link href="/settings/{userID}">
                 <a>
                   <Image
-                    className="fill-white duration-700 ease-in-out  hover:rotate-180"
+                    className="fill-white duration-700 ease-in-out hover:rotate-180"
                     alt="settings"
                     width={50}
                     height={50}

@@ -14,7 +14,7 @@ function About() {
             alt="DAI"
             width={50}
             height={50}
-            className="fill-white duration-700 ease-in-out  hover:rotate-90"
+            className="fill-white duration-700 ease-in-out hover:rotate-90"
           />
           <p>
             <strong>DAI</strong>
@@ -43,7 +43,7 @@ function About() {
             alt="BAT"
             width={50}
             height={50}
-            className="fill-white duration-700 ease-in-out  hover:rotate-90"
+            className="fill-white duration-700 ease-in-out hover:rotate-90"
           />
           <p>
             <strong>BAT</strong>

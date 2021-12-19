@@ -9,6 +9,12 @@ function settings() {
 
   // send req for user info and settings
 
+  //change userName function
+  const changeUserName = () => {
+    //send req to change userName
+    console.log("something");
+  };
+
   return (
     <div className="p-3">
       <h1>User</h1>
@@ -16,16 +22,14 @@ function settings() {
         <div>
           <p>UserName</p>
           <form onSubmit={changeUserName()}>
-            <label>{user.isLog ? { userName } : "not logged in"}</label>
-            <input placeholder={userName}></input>
             <button>Change Username</button>
           </form>
         </div>
         <div>
           <p>UserProfile</p>
-          <label>
+          {/* <label>
             <Image src="{userId}/profileImage" alt="should be your profile" />
-          </label>
+          </label> */}
         </div>
       </div>
     </div>
