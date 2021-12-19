@@ -1,40 +1,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 :root {
-  --dark: #0d1229;
-  --blue: #112ca3;
-  --blueHL: #0f2eb6;
-  --purpleBG: #2b2e75;
+    --dark: #0d1229;
+    --blue: #112ca3;
+    --blueHL: #0f2eb6;
+    --purpleBG: #2b2e75;
 }
+
 html,
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  color: black;
+    padding: 0;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    color: black;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+    color: inherit;
+    text-decoration: none;
 }
 
 * {
-  box-sizing: border-box;
-  text-align: center;
+    box-sizing: border-box;
+    text-align: center;
 }
 
 nav {
-  background-color: var(--dark);
-
-  color: white;
-  font-weight: 600;
+    background-color: rgb(15 23 42);
+    color: white;
+    font-weight: 600;
 }
 
 div {
-  background-color: #2b2e75;
-  color: white;
+    background-color: #2b2e75;
+    color: white;
 }
