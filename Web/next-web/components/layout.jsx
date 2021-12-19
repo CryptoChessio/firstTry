@@ -71,7 +71,7 @@ export default function Layout({ children }) {
             <li className="mx-5">
               <button
                 type="button"
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded p-2 -my-2"
+                className="bg-orange-500  hover:bg-blue-700 text-white font-bold rounded p-2 -my-2"
                 // onClick={login}
               >
                 Connect To MetaMask
