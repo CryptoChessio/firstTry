@@ -71,7 +71,7 @@ export default function Layout({ children }) {
             <li className="mx-5">
               <button
                 type="button"
-                className="bg-orange-500  hover:bg-blue-700 text-white font-bold rounded p-2 -my-2"
+                className="bg-orange-400 hover:bg-blue-900 text-white font-bold rounded p-2 -my-2"
                 // onClick={login}
               >
                 Connect To MetaMask
@@ -83,8 +83,8 @@ export default function Layout({ children }) {
                   <Image
                     className="fill-white duration-700 ease-in-out  hover:rotate-180"
                     alt="settings"
-                    width={50}
-                    height={50}
+                    width={28}
+                    height={28}
                     src={settingsSVG}
                   />
                 </a>
