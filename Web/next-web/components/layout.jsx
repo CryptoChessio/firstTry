@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { UPDATE_PROFILE } from "react-redux";
 // import { profile } from "../redux/reducers/profile";
+import settingsSVG from "../images/Settings/Settings.svg";
 import Moralis from "moralis";
 
 export default function Layout({ children }) {
@@ -46,27 +48,27 @@ export default function Layout({ children }) {
       <nav className="flex">
         <div className="flex-1 m-5 bg-slate-900">
           <ul className="list-none flex text-center items-center justify-center">
-            <li className="ml-2 m">
+            <li className="mx-5 border-solid border-2 border-indigo-600 rounded p-2">
               <Link href="/">
                 <a>Home</a>
               </Link>
             </li>
-            <li className="ml-2 mr-2">
+            <li className="mx-5 border-solid border-2 border-indigo-600 rounded p-2">
               <Link href="/play">
                 <a>Play</a>
               </Link>
             </li>
-            <li className="ml-2 mr-2">
+            <li className="mx-5 border-solid border-2 border-indigo-600 rounded p-2">
               <Link href="/leaderboard">
                 <a>Leaderboard</a>
               </Link>
             </li>
-            <li className="ml-2 mr-2">
+            <li className="mx-5 border-solid border-2 border-indigo-600 rounded p-2">
               <Link href="/about">
                 <a>About</a>
               </Link>
             </li>
-            <li className="ml-2 mr-2">
+            <li className="mx-5">
               <button
                 type="button"
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded p-2 -my-2"
@@ -75,13 +77,16 @@ export default function Layout({ children }) {
                 Connect To MetaMask
               </button>
             </li>
-            <li className="ml-2 mr-2">
+            <li className="mx-5">
               <Link href="/settings/{userID}">
                 <a>
-                  <img
-                    className="bg-gray-200 -m-1"
-                    src="https://img.icons8.com/ios-filled/50/000000/apple-settings.png"
-                  />{" "}
+                  <Image
+                    className="fill-white"
+                    alt="settings"
+                    width={50}
+                    height={50}
+                    src={settingsSVG}
+                  />
                 </a>
               </Link>
             </li>
