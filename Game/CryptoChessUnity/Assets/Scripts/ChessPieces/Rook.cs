@@ -46,11 +46,11 @@ public class Rook : ChessPiece
         //Left
         for (int i = currX - 1; i >= 0; i--)
         { // if these is no pieces
-            if (board[i, i] == null)
+            if (board[i, currY] == null)
             {
                 moves.Add(new Vector2Int(i, currY));
             }
-            if (board[i, i] != null)
+            if (board[i, currY] != null)
             {  //if there is a piece
                 if (board[i, currY].team != team)
                 {
@@ -63,11 +63,11 @@ public class Rook : ChessPiece
         //Right
         for (int i = currX + 1; i < tileCountX; i++)
         { // if these is no pieces
-            if (board[i, i] == null)
+            if (board[i, currY] == null)
             {
                 moves.Add(new Vector2Int(i, currY));
             }
-            if (board[i, i] != null)
+            if (board[i, currY] != null)
             {  //if there is a piece
                 if (board[i, currY].team != team)
                 {

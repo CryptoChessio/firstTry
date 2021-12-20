@@ -36,8 +36,11 @@ public class board : MonoBehaviour
     private GameObject[,] tiles; //2 dem array 
     private Camera currentCamera;
     private Vector2Int currentHover;
+
+    private bool isWhiteTurn;
     public void Awake()
     {
+        isWhiteTurn = true;
         GenrateGrid(TILE_SIZE, TILE_C_X, TILE_C_Y);
 
         //test
@@ -89,7 +92,7 @@ public class board : MonoBehaviour
                 Debug.Log("click");
                 if (chessPieces[hitPostion.x, hitPostion.y] != null)
                 { //if there is a piece
-                    if (true)
+                    if ((chessPieces[hitPostion.x, hitPostion.y].team == 0 && isWhiteTurn) || (chessPieces[hitPostion.x, hitPostion.y].team == 1 && !isWhiteTurn))
                     { //is turn
                         ACTIVE = chessPieces[currentHover.x, currentHover.y]; //set active
 
@@ -295,11 +298,16 @@ public class board : MonoBehaviour
 
             if (ocp.team == 0)
             {
+                if (ocp.type == ChessPieceType.King)
+                    checkMate(1);
+
                 deadWhite.Add(ocp);
                 Destroy(ocp.gameObject);
             }
             else
             {
+                if (ocp.type == ChessPieceType.King)
+                    checkMate(0);
                 deadBlack.Add(ocp);
                 Destroy(ocp.gameObject);
             }
@@ -308,9 +316,29 @@ public class board : MonoBehaviour
         chessPieces[prevPos.x, prevPos.y] = null; //set prev pos to null
 
         PostionSinglePiece(x, y); //position piece
-
+        isWhiteTurn = !isWhiteTurn; //change turn
         return true;
 
+    }
+
+    //Checkmate
+    private void checkMate(int team)
+    {
+        DisplayVictory(team);
+    }
+
+    private void DisplayVictory(int team)
+    {
+        if (team == 0)
+            victoryText.text = "White Wins!";
+        else
+            victoryText.text = "Black Wins!";
+        victoryText.gameObject.SetActive(true);
+    }
+
+    public void onExitButton()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }
 
