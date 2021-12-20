@@ -45,7 +45,6 @@ export default function Layout({ children }) {
               </Link>
             </li>
             <li className="mx-5">
-<<<<<<< HEAD
               {isAuthenticated ? (
                 <button
                   onClick={logout}
@@ -65,15 +64,6 @@ export default function Layout({ children }) {
                   Connect To MetaMask
                 </button>
               )}
-=======
-              <button
-                type="button"
-                className="bg-orange-400 hover:bg-blue-900 text-white font-bold rounded p-2 -my-2"
-                // onClick={login}
-              >
-                Connect To MetaMask
-              </button>
->>>>>>> 81b203e0dd3c4b31e759cffb662eab9cacc5331f
             </li>
             <li className="mx-5">
               <Link href="/settings/{userID}">
