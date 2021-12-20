@@ -329,9 +329,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMat: {fileID: 2100000, guid: a1e3c708d73af78388b7364dc9c338e5, type: 2}
-  hoverMat: {fileID: 2100000, guid: 8e9bc99deb5a42a3b82204d61dba1cb3, type: 2}
+  hoverMat: {fileID: 0}
   WhiteHover: {fileID: 0}
   BlackHover: {fileID: 0}
+  AvalMovesMat: {fileID: 0}
   TILE_SIZE: 1
   prefab:
   - {fileID: 640895743420667179, guid: a3735addb0cbafe799f104c768f496ed, type: 3}

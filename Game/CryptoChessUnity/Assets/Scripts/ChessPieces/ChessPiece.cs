@@ -29,7 +29,7 @@ public class ChessPiece : MonoBehaviour
         // transform.localScale = Vector3.Lerp(transform.localScale, desScale, Time.deltaTime * 5); //lerp to des scale
     }
 
-    public List<Vector2Int> GetAvalMoves(
+    public virtual List<Vector2Int> GetAvalMoves(
         ref ChessPiece[,] board,
         int tileCountX,
         int tileCountY)
@@ -38,8 +38,8 @@ public class ChessPiece : MonoBehaviour
 
         moves.Add(new Vector2Int(3, 3));
         moves.Add(new Vector2Int(3, 4));
-        moves.Add(new Vector2Int(3, 5));
-        moves.Add(new Vector2Int(3, 6));
+        moves.Add(new Vector2Int(4, 3));
+        moves.Add(new Vector2Int(4, 4));
 
         return moves;
 

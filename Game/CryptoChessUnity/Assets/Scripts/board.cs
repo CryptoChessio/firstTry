@@ -77,11 +77,11 @@ public class board : MonoBehaviour
                 currentHover = hitPostion; //set hover to hit tile
                 tiles[hitPostion.x, hitPostion.y].GetComponent<Renderer>().material = hoverMat;
             }
-            if (currentHover != -Vector2Int.one)
+            if (currentHover != hitPostion)
             {
+                tiles[currentHover.x, currentHover.y].GetComponent<Renderer>().material = tileMat;
                 currentHover = hitPostion; //set new hover to hit tile
-                tiles[currentHover.x, currentHover.y].GetComponent<MeshRenderer>().material = hoverMat;
-
+                tiles[hitPostion.x, hitPostion.y].GetComponent<Renderer>().material = hoverMat;
             }
 
             if (Input.GetMouseButtonDown(0))
@@ -96,6 +96,10 @@ public class board : MonoBehaviour
                         avalMoves = ACTIVE.GetAvalMoves(ref chessPieces, TILE_C_X, TILE_C_Y); //get aval moves
                         HighlightTiles(); //highlight aval moves
                     }
+                }
+                else
+                {
+                    UnhighlightTiles();
                 }
             }
 
@@ -120,7 +124,8 @@ public class board : MonoBehaviour
         {
             if (currentHover != -Vector2Int.one)
             {
-                tiles[currentHover.x, currentHover.y].GetComponent<Renderer>().material = tileMat;
+                foreach (GameObject tile in tiles) //loop through all tiles **this is terrible code**
+                    tile.GetComponent<Renderer>().material = tileMat;
                 currentHover = -Vector2Int.one;
             }
 
@@ -264,8 +269,21 @@ public class board : MonoBehaviour
         avalMoves.Clear();
     }
 
+    private bool ContainsValidMove(ref List<Vector2Int> moves, Vector2 pos)
+    {
+        for (int i = 0; i < moves.Count; i++)
+            if (moves[i].x == pos.x && moves[i].y == pos.y)
+                return true;
+        return false;
+    }
+
     private bool MoveTo(ChessPiece ACTIVE, int x, int y)
     { //move to
+
+        if (!ContainsValidMove(ref avalMoves, new Vector2(x, y)))
+        {
+            return false;
+        }
         Vector2Int prevPos = new Vector2Int(ACTIVE.currX, ACTIVE.currY); //get prev pos
         //is there another piece on target pos
         if (chessPieces[x, y] != null)
