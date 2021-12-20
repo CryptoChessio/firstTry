@@ -21,6 +21,7 @@ contract WinLose {
         
     }
     function addPlayer(address memory player1, address memory player2) public {
-        
+        player1 = player1;
+        player2 = player2;
     }
 }
