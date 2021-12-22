@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class board : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class board : MonoBehaviour
     [Header("Pretty")]
 
     [SerializeField] private Material tileMat;
+
+
     [SerializeField] private Material hoverMat;
 
     [SerializeField] private Material WhiteHover;
@@ -17,6 +20,10 @@ public class board : MonoBehaviour
     [SerializeField] private Material AvalMovesMat;
 
     [SerializeField] private float TILE_SIZE = 1.0f;
+
+    [SerializeField] private GameObject victoryScreen;
+
+    public TextMeshProUGUI victoryText;
 
     [Header("Prefabs and Mats")]
 
@@ -222,6 +229,7 @@ public class board : MonoBehaviour
         piece.type = type;
         piece.team = team;
         piece.GetComponent<MeshRenderer>().material = mats[team]; //set material
+        piece.GetComponent<MeshRenderer>().material = teamMaterials[((team == 0) ? 0 : 6)] + ((int)type - 1)];
         return piece;
     }
 
@@ -329,16 +337,18 @@ public class board : MonoBehaviour
 
     private void DisplayVictory(int team)
     {
+        victoryScreen.SetActive(true);
         if (team == 0)
-            victoryText.text = "White Wins!";
-        else
             victoryText.text = "Black Wins!";
-        victoryText.gameObject.SetActive(true);
+        else
+            victoryText.text = "White Wins!";
+
     }
 
     public void onExitButton()
     {
-        SceneManager.LoadScene("MainMenu");
+        Application.Quit();
+        Debug.Log("Exit");
     }
 }
 

@@ -22,7 +22,10 @@ public class ChessPiece : MonoBehaviour
     public ChessPieceType type;
     public Vector3 desPosition;
     // public Vector3 desScale = new Vector3(1,1,1);
-
+    public void Start()
+    {
+        transform.rotation = Quaternion.Euler((team == 0) ? new Vector3(-90, 90, 0) : new Vector3(-90, 270, 0));
+    }
     private void Update()
     {
         transform.position = Vector3.Lerp(transform.position, desPosition, Time.deltaTime * 5); //lerp to des position
