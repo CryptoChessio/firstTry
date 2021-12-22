@@ -846,7 +846,7 @@ MonoBehaviour:
   AvalMovesMat: {fileID: 0}
   TILE_SIZE: 1
   victoryScreen: {fileID: 1514889723}
-  victoryText: {fileID: 1353264947}
+  victoryText: {fileID: 1353264949}
   prefab:
   - {fileID: 640895743420667179, guid: a3735addb0cbafe799f104c768f496ed, type: 3}
   - {fileID: 3081729690767363122, guid: f6cae6d2675ae6c0f87f32966e092dd0, type: 3}
