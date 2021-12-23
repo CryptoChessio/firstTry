@@ -1,4 +1,4 @@
-import Collapse from 'react-bootstrap/Collapse'
+import Collapse from 'react-bootstrap/Collapse';
 import React, { useEffect, useState } from 'react';
 import Image from "next/image";
 import Hero from "../images/Home/Hero.svg";
@@ -11,7 +11,7 @@ function HomePage() {
     <div className="p-3">
       <Image
         src={Hero}
-        alt="home hero"
+        alt="home her"
         width={1400}
         height={700}
         className="z-1"
