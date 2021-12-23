@@ -22,7 +22,7 @@ public class board : MonoBehaviour
 
     [SerializeField] private Material WhiteHover;
 
-    [SerializeField] private Material BlackHover;
+    [SerializeField] private Material ACTIVE_HOVER;
 
     [SerializeField] private Material AvalMovesMat;
 
@@ -55,7 +55,7 @@ public class board : MonoBehaviour
 
     private Camera currentCamera;
     private Vector2Int currentHover;
-
+    private bool end = false;
     private bool isWhiteTurn;
     private SpecialMove specialMove;
     private List<Vector2Int[]> movesList = new List<Vector2Int[]>();
@@ -88,94 +88,103 @@ public class board : MonoBehaviour
         // foreach (GameObject tile in tiles) //loop through all tiles **this is terrible code**
         //     tile.GetComponent<Renderer>().material = tileMat; //set material to default
 
+        if (!end)
+        {
+            RaycastHit info;
+            Ray ray = currentCamera.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out info, 100))
+            { //if raycast hits a tile
+              //get index of hit tile
+                Vector2Int hitPostion = LookTileIndex(info.transform.gameObject); //get index of hit tile
 
-        RaycastHit info;
-        Ray ray = currentCamera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out info, 100))
-        { //if raycast hits a tile
-            //get index of hit tile
-            Vector2Int hitPostion = LookTileIndex(info.transform.gameObject); //get index of hit tile
+                if (currentHover == -Vector2Int.one)
+                { //if no hover
+                    currentHover = hitPostion; //set hover to hit tile
+                    tiles[hitPostion.x, hitPostion.y].GetComponent<Renderer>().material = hoverMat;
+                }
+                if (currentHover != hitPostion)
+                {
+                    tiles[currentHover.x, currentHover.y].GetComponent<Renderer>().material = tileMat;
+                    currentHover = hitPostion; //set new hover to hit tile
+                    tiles[hitPostion.x, hitPostion.y].GetComponent<Renderer>().material = hoverMat;
+                }
 
-            if (currentHover == -Vector2Int.one)
-            { //if no hover
-                currentHover = hitPostion; //set hover to hit tile
-                tiles[hitPostion.x, hitPostion.y].GetComponent<Renderer>().material = hoverMat;
-            }
-            if (currentHover != hitPostion)
-            {
-                tiles[currentHover.x, currentHover.y].GetComponent<Renderer>().material = tileMat;
-                currentHover = hitPostion; //set new hover to hit tile
-                tiles[hitPostion.x, hitPostion.y].GetComponent<Renderer>().material = hoverMat;
-            }
+                if (Input.GetMouseButtonDown(0))
+                {
+                    if (chessPieces[hitPostion.x, hitPostion.y] != null)
+                    { //if there is a piece
+                        UnhighlightTiles();
+                        if ((chessPieces[hitPostion.x, hitPostion.y].team == 0 && isWhiteTurn) || (chessPieces[hitPostion.x, hitPostion.y].team == 1 && !isWhiteTurn))
+                        { //is turn
+                            ACTIVE = chessPieces[currentHover.x, currentHover.y]; //set active
+                            tiles[hitPostion.x, hitPostion.y].GetComponent<Renderer>().material = ACTIVE_HOVER;
+                            avalMoves = ACTIVE.GetAvalMoves(ref chessPieces, TILE_C_X, TILE_C_Y); //get aval moves
 
-            if (Input.GetMouseButtonDown(0))
-            {
-                Debug.Log("click");
-                if (chessPieces[hitPostion.x, hitPostion.y] != null)
-                { //if there is a piece
-                    if ((chessPieces[hitPostion.x, hitPostion.y].team == 0 && isWhiteTurn) || (chessPieces[hitPostion.x, hitPostion.y].team == 1 && !isWhiteTurn))
-                    { //is turn
-                        ACTIVE = chessPieces[currentHover.x, currentHover.y]; //set active
+                            specialMove = ACTIVE.GetSpecialMove(ref chessPieces, ref movesList, ref avalMoves);
 
-                        avalMoves = ACTIVE.GetAvalMoves(ref chessPieces, TILE_C_X, TILE_C_Y); //get aval moves
-
-                        specialMove = ACTIVE.GetSpecialMove(ref chessPieces, ref movesList, ref avalMoves);
-
-                        HighlightTiles(); //highlight aval moves
+                            HighlightTiles(); //highlight aval moves
+                        }
+                    }
+                    else
+                    {
+                        UnhighlightTiles();
                     }
                 }
-                else
+
+
+                if (ACTIVE != null && Input.GetMouseButtonUp(0))
+                { //mouse release 
+                    Vector2Int prevPos = new Vector2Int(ACTIVE.currX, ACTIVE.currY); //prev pos
+                    Debug.Log("prevPos: " + prevPos);
+                    bool validMove = MoveTo(ACTIVE, hitPostion.x, hitPostion.y); //move piece
+                    if (!validMove)
+                    { //if move is invalid
+                        ACTIVE.SetPosition(GetTileCenter(prevPos.x, prevPos.y)); //move piece back
+                        ACTIVE = null; //reset active
+                    }
+                    else
+                    {
+                        ACTIVE = null; //reset active
+                    }
+                }
+                if (end)
                 {
-                    UnhighlightTiles();
+                    //set material of all tiles to tilemat
+                    for (int x = 0; x < TILE_C_X; x++)
+                        for (int y = 0; y < TILE_C_Y; y++)
+                            tiles[x, y].GetComponent<Renderer>().material = tileMat;
                 }
-            }
 
-            if (ACTIVE != null && Input.GetMouseButtonUp(0))
-            { //mouse release 
-                Vector2Int prevPos = new Vector2Int(ACTIVE.currX, ACTIVE.currY); //prev pos
-                Debug.Log("prevPos: " + prevPos);
-                bool validMove = MoveTo(ACTIVE, hitPostion.x, hitPostion.y); //move piece
-                if (!validMove)
-                { //if move is invalid
-                    ACTIVE.SetPosition(GetTileCenter(prevPos.x, prevPos.y)); //move piece back
-                    ACTIVE = null; //reset active
-                }
-                else
+            }
+            else
+            {
+                if (currentHover != -Vector2Int.one)
                 {
-                    ACTIVE = null; //reset active
+                    foreach (GameObject tile in tiles) //loop through all tiles **this is terrible code**
+                        tile.GetComponent<Renderer>().material = tileMat;
+                    currentHover = -Vector2Int.one;
+                }
+
+                if (ACTIVE && Input.GetMouseButtonUp(0))
+                {
+                    ACTIVE.SetPosition(GetTileCenter(ACTIVE.currX, ACTIVE.currY));
+                    ACTIVE = null;
                 }
             }
 
-        }
-        else
-        {
-            if (currentHover != -Vector2Int.one)
-            {
-                foreach (GameObject tile in tiles) //loop through all tiles **this is terrible code**
-                    tile.GetComponent<Renderer>().material = tileMat;
-                currentHover = -Vector2Int.one;
-            }
+            // set tiles with chess pieces to have a WhiteTile matriel
 
-            if (ACTIVE && Input.GetMouseButtonUp(0))
+            //if dragging piece 
+            if (ACTIVE)
             {
-                ACTIVE.SetPosition(GetTileCenter(ACTIVE.currX, ACTIVE.currY));
-                ACTIVE = null;
+                Plane horzPlan = new Plane(Vector3.up, Vector3.up);
+                float distance = 0.0f;
+                if (horzPlan.Raycast(ray, out distance))
+                {
+                    ACTIVE.SetPosition(ray.GetPoint(distance));
+                }
             }
         }
-
-        // set tiles with chess pieces to have a WhiteTile matriel
-
-        //if dragging piece 
-        if (ACTIVE)
-        {
-            Plane horzPlan = new Plane(Vector3.up, Vector3.up);
-            float distance = 0.0f;
-            if (horzPlan.Raycast(ray, out distance))
-            {
-                ACTIVE.SetPosition(ray.GetPoint(distance));
-            }
-        }
-
     }
 
     //board gen
@@ -308,7 +317,6 @@ public class board : MonoBehaviour
 
     private bool MoveTo(ChessPiece ACTIVE, int x, int y)
     { //move to
-
         if (!ContainsValidMove(ref avalMoves, new Vector2Int(x, y)))
         {
             return false;
@@ -344,6 +352,10 @@ public class board : MonoBehaviour
         PostionSinglePiece(x, y); //position piece
 
         isWhiteTurn = !isWhiteTurn; //change turn
+        // change all tiles to tile mat
+        for (int penis = 0; penis < TILE_C_X; penis++)
+            for (int pp = 0; pp < TILE_C_Y; pp++)
+                tiles[penis, pp].GetComponent<MeshRenderer>().material = tileMat;
         movesList.Add(new Vector2Int[] { prevPos, new Vector2Int(x, y) }); //add move to list
 
         ProcessSpecialMove();
@@ -388,16 +400,18 @@ public class board : MonoBehaviour
                 if (targetPawn.team == 0 && lastMove[1].y == 7)
                 {
                     ChessPiece newQueen = SpawnSinglePiece(ChessPieceType.Queen, 0);
+                    newQueen.transform.position = chessPieces[lastMove[1].x, lastMove[1].y].transform.position;
                     Destroy(chessPieces[lastMove[1].x, lastMove[1].y].gameObject);
                     chessPieces[lastMove[1].x, lastMove[1].y] = newQueen;
-                    PostionSinglePiece(lastMove[1].x, lastMove[1].y, true);
+                    PostionSinglePiece(lastMove[1].x, lastMove[1].y);
                 }
                 if (targetPawn.team == 0 && lastMove[1].y == 0)
                 {
                     ChessPiece newQueen = SpawnSinglePiece(ChessPieceType.Queen, 1);
+                    newQueen.transform.position = chessPieces[lastMove[1].x, lastMove[1].y].transform.position;
                     Destroy(chessPieces[lastMove[1].x, lastMove[1].y].gameObject);
                     chessPieces[lastMove[1].x, lastMove[1].y] = newQueen;
-                    PostionSinglePiece(lastMove[1].x, lastMove[1].y, true);
+                    PostionSinglePiece(lastMove[1].x, lastMove[1].y);
                 }
             }
         }
@@ -453,6 +467,7 @@ public class board : MonoBehaviour
     //Checkmate
     private void checkMate(int team)
     {
+        end = true;
         DisplayVictory(team);
     }
 
