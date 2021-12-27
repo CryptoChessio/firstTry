@@ -1,12 +1,12 @@
 import Collapse from 'react-bootstrap/Collapse'
-import React, { useEffect, useState } from 'react';
-import Image from "next/image";
-import Hero from "../images/Home/Hero.svg";
+import React, { useEffect, useState } from 'react'
+import Image from 'next/image'
+import Hero from '../images/Home/Hero.svg'
 function HomePage() {
-  const [checked,setChecked] = useState(false);
-    useEffect(() => {
-      setChecked(true);
-    },[]);
+  const [checked, setChecked] = useState(false)
+  useEffect(() => {
+    setChecked(true)
+  }, [])
   return (
     <div className="p-3">
       <Image
@@ -21,11 +21,10 @@ function HomePage() {
         {...(checked ? { timeout: 1000 } : {})}
         collapsedHeight={50}
       >
-     Crypto <span className="text-blue-300">Chess</span>
-     </Collapse>
-     </div>
-
-  );
+        Crypto <span className="text-blue-300">Chess</span>
+      </Collapse>
+    </div>
+  )
 }
 
-export default HomePage;
+export default HomePage

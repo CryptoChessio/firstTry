@@ -12,14 +12,14 @@ function play() {
           <p className="text-blue-900">Buy in 1 BAT</p>
         </div>
         <div className="bg-indigo-500 rounded-lg p-5 m-2">
-        <h1>4D Chess (coming soon)</h1>
+          <h1>4D Chess (coming soon)</h1>
           <p className="text-indigo-900">Buy in 1 MATIC</p>
         </div>
       </div>
       {/* <h2>Welcome {user.get("username")}</h2>
       <h2>Your wallet address is {user.get("ethAddress")}</h2> */}
     </div>
-  );
+  )
 }
 
-export default play;
+export default play

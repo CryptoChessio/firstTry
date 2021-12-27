@@ -1,11 +1,13 @@
-import Image from "next/image";
-import Polygon from "../images/Icons/polygon.png";
-import bat from "../images/Icons/bat.png";
-import DAI from "../images/Icons/DAI.png";
+import Image from 'next/image'
+import Polygon from '../images/Icons/polygon.png'
+import bat from '../images/Icons/bat.png'
+import DAI from '../images/Icons/DAI.png'
 function About() {
   return (
     <div className="m-3 text-slate-700 ">
-      <h2 className="text-white tracking-wide text-2xl m-3 tracking-wide">Tokenomics</h2>
+      <h2 className="text-white tracking-wide text-2xl m-3 tracking-wide">
+        Tokenomics
+      </h2>
 
       <div className="list-none text-center items-center justify-center flex shadow-xl">
         <div className="bg-gradient-to-r from-yellow-500 to-yellow-200 rounded-lg p-5 m-2">
@@ -53,7 +55,7 @@ function About() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default About;
+export default About

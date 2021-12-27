@@ -1,23 +1,23 @@
-import Link from "next/link";
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useMoralis } from "react-moralis";
-import settingsSVG from "../images/Settings/Settings.svg";
+import Link from 'next/link'
+import Image from 'next/image'
+import { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { useMoralis } from 'react-moralis'
+import settingsSVG from '../images/Settings/Settings.svg'
 
 export default function Layout({ children }) {
-  const [userID, setUserID] = useState();
-  const [UserNameState, setNameState] = useState();
-  const dispatch = useDispatch();
-  const { authenticate, isAuthenticated, logout, user } = useMoralis();
+  const [userID, setUserID] = useState()
+  const [UserNameState, setNameState] = useState()
+  const dispatch = useDispatch()
+  const { authenticate, isAuthenticated, logout, user } = useMoralis()
   // when authenticated, set the user address and name
   useEffect(() => {
     if (user) {
-      setUserID(user.get("ethAddress"));
-      setNameState(user.get("username"));
+      setUserID(user.get('ethAddress'))
+      setNameState(user.get('username'))
     }
-    console.log(userID);
-  });
+    console.log(userID)
+  })
 
   return (
     <>
@@ -51,14 +51,14 @@ export default function Layout({ children }) {
                   className="bg-transparent hover:bg-indigo-600 text-orange-300 font-semibold hover:text-white py-2 px-4 border border-indigo-600 hover:border-transparent rounded"
                 >
                   Logout
-                  <p className="text-xs">{user.get("ethAddress")}</p>
+                  <p className="text-xs">{user.get('ethAddress')}</p>
                 </button>
               ) : (
                 <button
                   type="button"
                   className="bg-orange-500  hover:bg-blue-700 text-white font-bold rounded p-2 -my-2"
                   onClick={() => {
-                    authenticate({ provider: "metamask" });
+                    authenticate({ provider: 'metamask' })
                   }}
                 >
                   Connect To MetaMask
@@ -83,5 +83,5 @@ export default function Layout({ children }) {
       </nav>
       {children}
     </>
-  );
+  )
 }
