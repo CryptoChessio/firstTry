@@ -6,9 +6,9 @@ public class Knight : ChessPiece
 
 
     public override List<Vector2Int> GetAvalMoves(
-       ref ChessPiece[,] board,
-       int tileCountX,
-       int tileCountY)
+        ref ChessPiece[,] board,
+        int tileCountX,
+        int tileCountY)
     {
         List<Vector2Int> moves = new List<Vector2Int>();
 

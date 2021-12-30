@@ -2123,12 +2123,12 @@ MonoBehaviour:
   victoryScreen: {fileID: 1514889723}
   victoryText: {fileID: 1353264949}
   prefab:
-  - {fileID: 640895743420667179, guid: a3735addb0cbafe799f104c768f496ed, type: 3}
-  - {fileID: 3081729690767363122, guid: f6cae6d2675ae6c0f87f32966e092dd0, type: 3}
-  - {fileID: 4384974309119339085, guid: d5544bde8769a18e7bcd0ffda1433a02, type: 3}
-  - {fileID: 4383424708844340290, guid: eae7c3b61d83d02df8bbddb5e658ecca, type: 3}
-  - {fileID: 963889351278247815, guid: b2470ab1582a2dfb3bb8b8a15ecdc243, type: 3}
-  - {fileID: 1247787570735854905, guid: 0e711be60c6265e019e1b5c1966c606b, type: 3}
+  - {fileID: 2771772368151607834, guid: 832a019a6c6a66960b41bb1a5b11fd32, type: 3}
+  - {fileID: 3688266223739020323, guid: 6de17f60149b0b816b6a313f752017cf, type: 3}
+  - {fileID: 4575655036816535664, guid: 6ac76a279dd6c9df09b3d4cc252e68f7, type: 3}
+  - {fileID: 3256162600570334738, guid: f590379b0dcca39999c36e49428746f4, type: 3}
+  - {fileID: 7144327086290939098, guid: f95b0b878bc9e9f51b74b39e2817d37f, type: 3}
+  - {fileID: 3680092956802839791, guid: b72983defba94fecdbb7d9884dbdc2f5, type: 3}
   mats:
   - {fileID: 2100000, guid: 8b9cbaefa376b982c95eafd6d0108eb9, type: 2}
   - {fileID: 2100000, guid: 30b6d3e43a7347f339617562cee3176d, type: 2}
