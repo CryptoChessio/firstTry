@@ -19,11 +19,11 @@ Still changing
 
 <hr>
 
-If you would like to contribute to the development or the team please message me
+If you would like to contribute or have question about the project please message me
 
-email : cryptoch3ss@gmail.com
-discord : @the_arctesian#8968
-telegram : @TheArctesian
+email : cryptoch3ss@gmail.com <br>
+discord : @the_arctesian#8968 <br>
+telegram : @TheArctesian <br>
 signal : @Arctesian
 
-//side note if you chose to message me on discord i do get a lot of friend req so please message me on telegram or signal first or send an email.
+**side note if you chose to message me on discord i do get a lot of friend req so please message me on telegram or signal first or send an email. Email will probably be the easiest**
