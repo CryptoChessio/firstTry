@@ -24,7 +24,14 @@ public class ChessPiece : MonoBehaviour
     // public Vector3 desScale = new Vector3(1,1,1);
     public void Start()
     {
-        transform.rotation = Quaternion.Euler((team == 0) ? new Vector3(-90, 90, 0) : new Vector3(-90, 270, 0));
+        transform.rotation = Quaternion.Euler((team == 0 ) ? new Vector3(-90, 90, 0) : new Vector3(-90, 270, 0));
+        //if chessPiece is pawn rotate it on the z direction by 90
+        if(type == ChessPieceType.Pawn)
+        {
+            transform.Rotate(new Vector3(0, -90, 0));
+            //transfrom up by 3
+            transform.Translate(new Vector3(0, 0, 10));
+        }
     }
     private void Update()
     {

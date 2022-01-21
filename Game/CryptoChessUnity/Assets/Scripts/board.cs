@@ -28,6 +28,11 @@ public class board : MonoBehaviour
 
     [SerializeField] private float TILE_SIZE = 1.0f;
 
+    [SerializeField] private float yOffset = 1.0f; 
+
+    [SerializeField] private Vector3 boardCenter = Vector3.zero;
+
+    private Vector3 bounds;
     [SerializeField] private GameObject victoryScreen;
 
     public TextMeshProUGUI victoryText;
@@ -72,6 +77,8 @@ public class board : MonoBehaviour
 
     private void GenrateGrid(float tileSize, int tileCountX, int tileCountY)
     {  //generate grid
+        yOffset += transform.position.y; //offset for the board
+        bounds = new Vector3((tileCountX /2) * tileSize, 0, (tileCountY / 2) * tileSize) + boardCenter; //center of the board
         tiles = new GameObject[tileCountX, tileCountY]; //2 dem array
         for (int x = 0; x < tileCountX; x++)
             for (int y = 0; y < tileCountY; y++)
@@ -199,10 +206,10 @@ public class board : MonoBehaviour
 
         //init verts for tiles
         Vector3[] verts = new Vector3[4];  //4 verts
-        verts[0] = new Vector3(x * tileSize, 0, y * tileSize); //top left
-        verts[1] = new Vector3(x * tileSize, 0, (y + 1) * tileSize); //bottom left
-        verts[2] = new Vector3((x + 1) * tileSize, 0, y * tileSize); //top right
-        verts[3] = new Vector3((x + 1) * tileSize, 0, (y + 1) * tileSize); //bottom right
+        verts[0] = new Vector3(x * tileSize, yOffset, y * tileSize) - bounds; //top left
+        verts[1] = new Vector3(x * tileSize, yOffset, (y + 1) * tileSize) - bounds; //bottom left
+        verts[2] = new Vector3((x + 1) * tileSize, yOffset, y * tileSize) - bounds; //top right
+        verts[3] = new Vector3((x + 1) * tileSize, yOffset, (y + 1) * tileSize) - bounds; //bottom right
 
         int[] triangle = new int[] { 0, 1, 2, 1, 3, 2 };  //triangles for mesh 
 
